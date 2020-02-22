@@ -42,8 +42,29 @@ layout: default
             {% endif %}
           </a>
           <p class="post-meta">
-				Topic: {{ post.topic }}.
-				Posted on {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html
+				Topic (s):
+				{% for t in post.topic %}
+					{% assign topic_name = post.topic[forloop.index0] %}
+					{% assign topic_url = null %}
+					{% for topic in site.topics %}
+						{% if topic.title == topic_name %}
+							{% assign topic_url = topic.url %}
+						{% endif %}
+					{% endfor %}
+				
+					{% if topic_url %}
+						<a href="{{ topic_url | prepend: site.baseurl | replace: '//', '/' }}">
+						{{ topic_name }}
+						</a>
+					{% else %}
+						{{ topic_name }}
+					{% endif %}
+
+					{% if forloop.rindex0 >= 1 %}
+					, <!-- Print a comma -->
+					{% endif %}
+				{% endfor %}
+				. Posted on {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html
 				content=post.content %}.          
           </p>
         </article>
