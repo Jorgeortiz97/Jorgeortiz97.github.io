@@ -8,20 +8,22 @@ layout: default
 {% else %}
 <header class="masthead">
 {% endif %}
+	{% unless page.no_overlay %}
 	<div class="overlay"></div>
+	{% endunless %}
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 col-md-60 mx-auto">
 				<div class="post-heading">
 					<h1>{{ page.title }}</h1>
 					{% if page.subtitle %}
-						<p>{{ page.subtitle }}</p>
+					<p>{{ page.subtitle }}</p>
 					{% endif %}
 				</div>
 			</div>
 		</div>
 	</div>
-	</header>
+</header>
 
 	<div class="container">
 		<div class="row">
@@ -66,11 +68,8 @@ layout: default
 					content=post.content %}.          
 				</p>
 			</article>
-
 			<hr>
-
 			{% endfor %}
-
 			</div>
 		</div>
 	</div>
